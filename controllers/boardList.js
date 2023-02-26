@@ -53,6 +53,21 @@ export const getBoardList = (req , res) => {
 
 }
 
+export const getRecentBoardList = (req , res) => {
+    
+    const q  = "SELECT * FROM board ORDER BY num desc LIMIT 5";
+
+    db.query(q)
+        .then(([rows , fields]) => {
+            return res.status(200).json(rows);
+        })
+        .catch((err)=> {
+            console.log(err)
+            return res.status(500).json({message:"An error occured while fetching get single board list"})
+        })
+
+}
+
     // try {
     //     const q = "SELECT * FROM board";
     //     const [rows,fields] = await db.query(q);
