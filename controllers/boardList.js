@@ -1,5 +1,7 @@
 import db from '../config/db.js'
+import util from 'util';
 
+const query = util.promisify(db.query).bind(db);
 
 export const getBoardLists = (req , res)=> {
     const q = "SELECT * FROM board";
@@ -13,8 +15,7 @@ export const getBoardLists = (req , res)=> {
         })
 }
 
-
-export const addBoardList = (req , res)=> {
+export const addBoardList = async (req , res)=> {
     const q = "INSERT INTO board (id, name, subject, content, regist_day, hit) VALUES (? , ? , ? , ? , ? , 0) "
 
     const values = [
@@ -66,8 +67,8 @@ export const getRecentBoardList = (req , res) => {
             return res.status(500).json({message:"An error occured while fetching get single board list"})
         })
 
-}
-
+}                                                          
+          
     // try {
     //     const q = "SELECT * FROM board";
     //     const [rows,fields] = await db.query(q);
