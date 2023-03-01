@@ -67,12 +67,3 @@ export const getRecentBoardList = (req , res) => {
         })
 
 }
-
-    // try {
-    //     const q = "SELECT * FROM board";
-    //     const [rows,fields] = await db.query(q);
-    //     return res.status(200).json(rows);
-    // } catch(err) {
-    //     console.log(err);
-    //     return res.status(500).send('An error occured while fetching location');
-    // }
