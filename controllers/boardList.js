@@ -79,6 +79,7 @@ export const getRecentBoardList = (req , res) => {
             return res.status(500).json({message:"An error occured while fetching get recnet board list"})
         })
 
+<<<<<<< HEAD
 }                                                          
           
     // try {
@@ -89,3 +90,6 @@ export const getRecentBoardList = (req , res) => {
     //     console.log(err);
     //     return res.status(500).send('An error occured while fetching location');
     // }
+=======
+}
+>>>>>>> 08e341e6af9c4cc66f83feb4b692e09c8c5652bf
