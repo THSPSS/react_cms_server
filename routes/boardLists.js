@@ -4,7 +4,7 @@ import { getBoardLists ,addBoardList, getBoardList ,getRecentBoardList} from "..
 const router = express.Router();
 
 router.get("/",getBoardLists);
-router.get("/view", getBoardList);
+router.get("/:num", getBoardList);
 router.get("/recent", getRecentBoardList)
 router.post("/",addBoardList);
 
