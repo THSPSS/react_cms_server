@@ -24,7 +24,7 @@ export const getBoardLists = (req , res)=> {
 
 }
 
-export const addBoardList = async (req , res)=> {
+export const addBoardList = (req , res)=> {
     const q = "INSERT INTO board (id, name, subject, content, hit) VALUES (? , ? , ? , ? , 0) "
 
     const values = [
@@ -65,18 +65,19 @@ export const getBoardList = (req , res) => {
 
 }
 
-export const getRecentBoardList = (req , res) => {
-    
-    const q  = "SELECT * FROM board ORDER BY num desc LIMIT 5";
 
-    db.query(q)
+export const getRecentPost = (req,res)=>{
+
+    const postLimit = 5
+    const q = " SELECT * FROM board ORDER BY num DESC LIMIT ? "
+ 
+    db.query(q, postLimit)
         .then(([rows , fields]) => {
             return res.status(200).json(rows);
         })
         .catch((err)=> {
-            return res.status(500).json({message:"An error occured while fetching get recnet board list"})
+            console.log(err)
+            return res.status(500).json({message:"An error occured while fetching get recent board list"})
         })
-
-
-}                                                          
- 
+        
+ }
