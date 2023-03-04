@@ -66,8 +66,6 @@ export const getBoardList = (req , res) => {
 }
 
 export const getRecentBoardList = (req , res) => {
-
-    console.log("request for react posts")
     
     const q  = "SELECT * FROM board ORDER BY num desc LIMIT 5";
 
