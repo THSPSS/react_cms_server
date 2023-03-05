@@ -1,5 +1,6 @@
 import db from '../config/db.js'
 import util from 'util';
+import jwt from 'jsonwebtoken';
 
 const query = util.promisify(db.query).bind(db);
 
@@ -80,4 +81,24 @@ export const getRecentPost = (req,res)=>{
             return res.status(500).json({message:"An error occured while fetching get recent board list"})
         })
         
+ }
+
+ export const deletePost = (req , res) => {
+    const token = req.cookies.access_token
+    if(!token) return res.status(401).json({message : "Not authenticated!"})
+
+
+
+    jwt.verify(token, "jwtkey", (err , userInfo)=>{
+        if(err) return res.status(403).json("Token is not valid")
+
+        const postNum = req.params.num
+        const q = "DELETE * FROM board WHERE `num` = ? AND `id` = ?"
+
+        db.query(q,[postNum , userInfo.id], (err,data) => {
+            if(err) return res.status(403).json({message:"You can delete only your post!"})
+
+            return res.json({message:"Post has been deleted!"})
+        })
+    })
  }
