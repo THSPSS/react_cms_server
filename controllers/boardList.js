@@ -33,7 +33,6 @@ export const addBoardList = (req, res) => {
     req.body.name,
     req.body.subject,
     req.body.content,
-    req.body.regist_day,
   ];
   //not contain file
 
