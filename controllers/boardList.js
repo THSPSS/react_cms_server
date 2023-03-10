@@ -52,8 +52,6 @@ export const getBoardList = (req, res) => {
   const q1 = "SELECT * FROM board WHERE num = ? ";
   const q2 = "UPDATE board SET hit = hit + ? WHERE num = ?";
 
-  console.log(req.params.num);
-
   Promise.all([
     db.query(q1, req.params.num),
     db.query(q2, [hitUpdate, req.params.num]),
