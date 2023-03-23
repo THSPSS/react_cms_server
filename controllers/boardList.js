@@ -84,24 +84,25 @@ export const getRecentPost = (req, res) => {
 };
 
 export const deletePost = (req, res) => {
-  const token = req.cookies.access_token;
-  if (!token) return res.status(401).json({ message: "Not authenticated!" });
+  // const token = req.cookies.access_token;
+  // if (!token) return res.status(401).json({ message: "Not authenticated!" });
+  // jwt.verify(token, "jwtkey", (err, userInfo) => {
+  //   if (err) return res.status(403).json("Token is not valid");
+  // })
+  const postNum = req.params.num;
+  //const q = "DELETE FROM board WHERE `num` = ? AND `id` = ?";
+  const q = "DELETE FROM board WHERE `num` = ? ";
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
-    if (err) return res.status(403).json("Token is not valid");
-
-    const postNum = req.params.num;
-    const q = "DELETE * FROM board WHERE `num` = ? AND `id` = ?";
-
-    db.query(q, [postNum, userInfo.id], (err, data) => {
-      if (err)
-        return res
-          .status(403)
-          .json({ message: "You can delete only your post!" });
-
+  db.query(q, postNum)
+    .then(([rows, fields]) => {
       return res.json({ message: "Post has been deleted!" });
+    })
+    .catch((err) => {
+      return res.status(403).json({
+        message: "You can delete only your post!",
+        err: `${err.message}`,
+      });
     });
-  });
 };
 
 export const updatePost = (req, res) => {
