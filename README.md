@@ -9,5 +9,5 @@
    - MariaDB
  
  #clone
- git clone https://github.com/THSPSS/cms_server.git
+ git clone https://github.com/THSPSS/react_cms_server.git
  
